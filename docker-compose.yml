@@ -9,7 +9,7 @@ services:
      - TIMEZONE=America/Montevideo
     ports:
      - "8089:8080"
-    image: tomcat:9.0.46
+    image: fruizb/tomcat:9.0.46
     volumes:
      - $PWD/tomcat9:/opt/tomcat/webapps
 
@@ -22,7 +22,7 @@ services:
      - TIMEZONE=America/Montevideo
     ports:
      - "8088:8080"
-    image: tomcat:8.5.66
+    image: fruizb/tomcat:8.5.66
     volumes:
      - $PWD/tomcat8:/opt/tomcat/webapps
 
