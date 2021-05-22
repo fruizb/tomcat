@@ -1,0 +1,36 @@
+version: '2'
+services:
+ tomcat9:
+    build:
+     context: Dockerfiles
+     dockerfile: Dockerfile-tomcat9
+    environment:
+     - CUSTOM_JAVA_OPTS="-Dfile.encoding=UTF-8"
+     - TIMEZONE=America/Montevideo
+    ports:
+     - "8089:8080"
+    image: tomcat:9.0.46
+    volumes:
+     - $PWD/tomcat9:/opt/tomcat/webapps
+
+ tomcat8:
+    build:
+     context: Dockerfiles
+     dockerfile: Dockerfile-tomcat8
+    environment:
+     - CUSTOM_JAVA_OPTS="-Dfile.encoding=UTF-8"
+     - TIMEZONE=America/Montevideo
+    ports:
+     - "8088:8080"
+    image: tomcat:8.5.66
+    volumes:
+     - $PWD/tomcat8:/opt/tomcat/webapps
+
+ mysql8:
+    image: mysql:8
+    ports:
+     - '3308:3306'
+    volumes:
+     - $PWD/database:/var/lib/mysql
+    environment:
+     - MYSQL_ROOT_PASSWORD=mysql8

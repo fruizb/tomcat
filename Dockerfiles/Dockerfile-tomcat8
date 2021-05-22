@@ -1,0 +1,19 @@
+FROM centos:8
+
+LABEL Autor="FACUNDO RUIZ" Proyecto="TOMCAT"
+
+WORKDIR /opt
+
+ENV TOMCAT_VERSION=https://downloads.apache.org/tomcat/tomcat-8/v8.5.66/bin/apache-tomcat-8.5.66.tar.gz
+
+RUN yum update -y && yum install wget java-1.8.0-openjdk vim -y
+
+RUN mkdir /opt/tomcat && wget $TOMCAT_VERSION --progress=bar:force -O /tmp/tomcat.tar.gz && \
+tar zxvf /tmp/tomcat.tar.gz -C /opt/tomcat --strip-components 1 && rm -rf /tmp/tomcat.tar.gz && \
+yum autoremove -y && yum clean all
+
+RUN chmod +x /opt/tomcat/bin/*
+
+COPY run.sh /usr/bin/
+
+CMD ["sh", "/usr/bin/run.sh"]
